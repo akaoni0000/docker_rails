@@ -8,8 +8,7 @@ railsプロジェクトを作成<br>
 webpackerをインストール<br>
 `rails webpacker:install`<br>
 
-## railsファイルを変更する<br>
-## database.ymlの一部を変更
+## railsファイルのdatabase.ymlの一部を変更
 default: &default<br>
   adapter: mysql2<br>
   encoding: utf8mb4<br>
