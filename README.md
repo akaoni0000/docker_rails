@@ -33,5 +33,7 @@ default: &default<br>
 対処法<br>
 `rails webpacker:compile`
 
+## githubのpush先を変更することを忘れない、このリポジトリにpushはしない。
+`git remote set-url origin リポジトリのurl.git`
 
   
