@@ -50,3 +50,8 @@ default: &default<br>
 Gemfileの<br>
 `gem 'rack-mini-profiler', '~> 2.0'` をコメントアウトしてbundle install、docker-compose stop、docker-compose up -dを実行
 
+## コンテナに入る
+コンテナが起動している場合<br>
+`docker exec -it コンテナ名 bash`<br>
+コンテナがexitしている場合<br>
+`docker-compose run app bash`
