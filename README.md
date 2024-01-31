@@ -41,4 +41,12 @@ default: &default<br>
 ## githubのpush先を変更することを忘れない、このリポジトリにpushはしない。
 `git remote set-url origin リポジトリのurl.git`
 
-  
+## bootsnap系のエラーの対処
+①config/boot.rbファイルを変更<br>
+`require bootsnap/setup`の部分をコメントアウト<br>
+②tmp/catch/bootsnap/以下のファイルを消す
+
+## railsのview画面の左上のmsを消す
+Gemfileの<br>
+`gem 'rack-mini-profiler', '~> 2.0'` をコメントアウトしてbundle install、docker-compose stop、docker-compose up -dを実行
+
