@@ -29,6 +29,11 @@ default: &default<br>
 `rails db:create`<br>
 `rails db:migrate`
 
+これでエラーがでたら
+①config/boot.rb ファイルの
+`require bootsnap/setup をコメントアウト`
+②tmp/cathc/bootsnap/以下のファイルを全て消去
+
 ## Webpacker::Manifest::MissingEntryError
 対処法<br>
 `rails webpacker:compile`
