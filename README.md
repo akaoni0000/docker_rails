@@ -106,3 +106,9 @@ volumes:
 
 コンテナがexitするとき
 docker logs コンテナ名でログを確認する exitしているものでもみれる docker-compose run app bashでexitしているコンテナにも入れる
+
+## ログファイル
+docker attach コンテナ名でログがリアルタイムでみれる<br>
+もしくは/log/development.log<br>
+これをtailコマンドでみれる<br>
+`tail -f development.log`
