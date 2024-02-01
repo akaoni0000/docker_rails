@@ -1,5 +1,5 @@
 ## クローンする
-`git clone git@github.com:akaoni0000/docker-rails-mysql.git 好きなディレクトリ名`
+`git clone https://github.com/akaoni0000/docker-rails-mysql-practice.git 好きなディレクトリ名`
 ## コンテナを作成
 railsプロジェクトを作成<br>
 `docker-compose run app bash`<br>
