@@ -55,3 +55,54 @@ Gemfileの<br>
 `docker exec -it コンテナ名 bash`<br>
 コンテナがexitしている場合<br>
 `docker-compose run app bash`
+
+binding.pryについて
+nginxがあるときは使えない
+使いたい時はnginxを消すしかない
+gem "pry-byebug"を追加
+docker-compose.ymlを以下のように変更
+
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    # command: bundle exec puma -C config/puma.rb
+    #nginxなし~追加~
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    ports:
+      - 80:3000
+    #nginxなし~追加~
+
+    volumes:
+      - .:/myapp
+      - tmp-data:/myapp/tmp
+    depends_on:
+      - db
+    tty: true #binding.pryを使うため
+    stdin_open: true #binding.pryを使うため
+  db:
+    platform: linux/x86_64 #m1だとこの記述が必要
+    image: mysql:5.7
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db-data:/var/lib/mysql
+  # web:
+  #   build:
+  #     context: nginx/
+  #   volumes:
+  #     - public-data:/myapp/public
+  #     - tmp-data:/myapp/tmp
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - app
+volumes:
+  public-data:
+  tmp-data:
+  db-data:
+使いたいところでbinding.pryを書く docker attach コンテナ名
+
+コンテナがexitするとき
+docker logs コンテナ名でログを確認する exitしているものでもみれる docker-compose run app bashでexitしているコンテナにも入れる
