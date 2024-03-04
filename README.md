@@ -88,16 +88,6 @@ services:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - db-data:/var/lib/mysql
-  # web:
-  #   build:
-  #     context: nginx/
-  #   volumes:
-  #     - public-data:/myapp/public
-  #     - tmp-data:/myapp/tmp
-  #   ports:
-  #     - 80:80
-  #   depends_on:
-  #     - app
 volumes:
   public-data:
   tmp-data:
