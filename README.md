@@ -1,14 +1,25 @@
-## クローンする
-`git clone https://github.com/akaoni0000/docker-rails-mysql-practice.git 好きなディレクトリ名`
-## コンテナを作成
+## ファイルの準備
+ディレクトリを作成 <br>
+`git clone https://github.com/akaoni0000/docker-rails-mysql-nginx-practice.git`<br>
+移動<br>
+`cd docker-rails-mysql-nginx-practice`<br>
 railsプロジェクトを作成<br>
-`docker-compose run app bash`<br>
-コマンドを入力<br>
-`rails new . --force --database=mysql`<br>
-webpackerをインストール<br>
-`rails webpacker:install`<br>
+`docker-compose run app rails new . --force --database=mysql`<br>
+railsファイルを変更する<br>
+## puma.rbに追加の記述
 
-## railsファイルのdatabase.ymlの一部を変更
+#追加
+<p>
+app_root = File.expand_path("../..", __FILE__)
+</p>
+<p>
+bind "unix://#{app_root}/tmp/sockets/puma.sock"
+</p>
+<p>
+stdout_redirect "#{app_root}/log/puma.stdout.log", "#{app_root}/log/puma.stderr.log", true
+</p>
+
+## database.ymlの一部を変更
 default: &default<br>
   adapter: mysql2<br>
   encoding: utf8mb4<br>
@@ -25,8 +36,8 @@ default: &default<br>
 `docker-compose up -d`
 
 ## データベースエラーがでたら
-コンテナに入って<br>
-`rails db:create`<br>
+コンテナに入って 
+`rails db:create`
 `rails db:migrate`
 
 これでエラーがでたら
@@ -56,12 +67,12 @@ Gemfileの<br>
 コンテナがexitしている場合<br>
 `docker-compose run app bash`
 
-binding.pryについて
-nginxがあるときは使えない
-使いたい時はnginxを消すしかない
-gem "pry-byebug"を追加
+## binding.pryについて
+nginxがあるときは使えない <br>
+使いたい時はnginxを消すしかない <br>
+`gem "pry-byebug"`を追加 <br>
 docker-compose.ymlを以下のように変更
-
+```
 version: '3'
 services:
   app:
@@ -102,13 +113,13 @@ volumes:
   public-data:
   tmp-data:
   db-data:
-使いたいところでbinding.pryを書く docker attach コンテナ名
+```
 
-コンテナがexitするとき
-docker logs コンテナ名でログを確認する exitしているものでもみれる docker-compose run app bashでexitしているコンテナにも入れる
+使いたいところでbinding.pryを書く docker attach コンテナ名 <br>
 
-## ログファイル
-docker attach コンテナ名でログがリアルタイムでみれる<br>
-もしくは/log/development.log<br>
-これをtailコマンドでみれる<br>
-`tail -f development.log`
+## コンテナがexitするとき
+`docker logs コンテナ名`でログを確認する exitしているものでもみれる
+`docker-compose run app bash`でexitしているコンテナにも入れる
+
+
+
