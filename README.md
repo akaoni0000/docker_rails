@@ -61,7 +61,7 @@ nginxがあるときは使えない
 使いたい時はnginxを消すしかない
 gem "pry-byebug"を追加
 docker-compose.ymlを以下のように変更
-
+```
 version: '3'
 services:
   app:
@@ -92,6 +92,7 @@ volumes:
   public-data:
   tmp-data:
   db-data:
+```
 使いたいところでbinding.pryを書く docker attach コンテナ名
 
 コンテナがexitするとき
